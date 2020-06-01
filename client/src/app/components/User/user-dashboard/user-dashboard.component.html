@@ -1,0 +1,15 @@
+<div class="container">
+  <mat-card class="shopping-cart">
+    <app-shopping-cart></app-shopping-cart>
+  </mat-card>
+
+  <mat-card class="control">
+    <app-products
+      *ngIf="!cartService.isOrdered && !orderService.orderSubmitted"
+    ></app-products>
+    <app-order-page *ngIf="cartService.isOrdered"></app-order-page>
+    <app-order-submitted
+      *ngIf="orderService.orderSubmitted"
+    ></app-order-submitted>
+  </mat-card>
+</div>

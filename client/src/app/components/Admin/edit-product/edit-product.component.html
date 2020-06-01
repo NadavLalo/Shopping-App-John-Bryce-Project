@@ -1,0 +1,140 @@
+<div class="container">
+  <form #editForm="ngForm" *ngIf="!isEdited && !onDelete && !isDeleted">
+    <h3>
+      Edit Product
+      <button
+        mat-mini-fab
+        class="delete"
+        color="warn"
+        (click)="onDeleteClick()"
+      >
+        <i class="material-icons">
+          delete_forever
+        </i>
+      </button>
+    </h3>
+    <hr />
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Name:"
+        type="text"
+        name="name"
+        ngModel
+        #name="ngModel"
+        (ngModelChange)="validationErrors.name ? onInputChange(name) : null"
+        [ngModel]="data.product.name"
+      />
+    </mat-form-field>
+    <p
+      *ngIf="(!name.valid && name.touched) || validationErrors.name"
+      class="error"
+    >
+      This field is
+    </p>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="Price:"
+        name="price"
+        ngModel
+        #price="ngModel"
+        (ngModelChange)="validationErrors.price ? onInputChange(price) : null"
+        [ngModel]="data.product.price"
+      />
+    </mat-form-field>
+    <p
+      *ngIf="(!price.valid && price.touched) || validationErrors.price"
+      class="error"
+    >
+      This field is
+    </p>
+
+    <mat-form-field style="width: 180px">
+      <ngx-mat-file-input
+        (change)="onFileChange($event)"
+        name="image"
+        placeholder="Image"
+        ngModel
+        #image="ngModel"
+      ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select
+        name="category"
+        ngModel
+        #category="ngModel"
+        [ngModel]="data.product.category"
+        (ngModelChange)="
+          validationErrors.category ? onInputChange(category) : null
+        "
+      >
+        <mat-option
+          *ngFor="let category of productService.categories"
+          value="{{ category._id }}"
+        >
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <p
+      *ngIf="(!category.valid && category.touched) || validationErrors.category"
+      class="error"
+    >
+      This field is
+    </p>
+    <div>
+      <button
+        mat-raised-button
+        type="button"
+        class="primary-button"
+        [disabled]="!editForm.valid"
+        (click)="onSubmit(editForm)"
+      >
+        Edit
+      </button>
+      <button
+        mat-raised-button
+        type="button"
+        class="cancel-button"
+        (click)="closeDialog()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="isEdited">
+    <h3>Product has been edited</h3>
+  </div>
+
+  <div *ngIf="onDelete">
+    <p>Are you sure you want to delete this product?</p>
+    <button
+      mat-raised-button
+      type="button"
+      color="warn"
+      (click)="onDeleteConfirm(data.product._id)"
+    >
+      Delete
+    </button>
+    <button
+      mat-raised-button
+      type="button"
+      class="cancel-button"
+      (click)="onDelete = false"
+    >
+      Cancel
+    </button>
+  </div>
+
+  <div *ngIf="isDeleted">
+    <h3>Product has been deleted</h3>
+  </div>
+</div>

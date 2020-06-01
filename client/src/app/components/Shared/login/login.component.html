@@ -1,0 +1,99 @@
+<div class="container">
+  <mat-card class="login-card">
+    <div *ngIf="!authService.isLogged">
+      <h4>Login / Sign up</h4>
+      <hr />
+
+      <h5>Registered?</h5>
+      <form #logInForm="ngForm">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Email:"
+            type="text"
+            id="email"
+            name="email"
+            ngModel
+            #email="ngModel"
+            (ngModelChange)="authService.error ? handleChange() : null"
+            required
+          />
+        </mat-form-field>
+        <p *ngIf="!email.valid && email.touched" class="error">
+          This field is required
+        </p>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Password:"
+            type="password"
+            id="password"
+            name="password"
+            ngModel
+            #password="ngModel"
+            (ngModelChange)="authService.error ? handleChange() : null"
+            required
+          />
+        </mat-form-field>
+        <p *ngIf="!password.valid && password.touched" class="error">
+          This field is required
+        </p>
+        <p
+          *ngIf="email.touched && password.touched && authService.error"
+          class="error"
+        >
+          Invalid Email or Password
+        </p>
+      </form>
+      <button
+        mat-raised-button
+        type="button"
+        (click)="login(logInForm)"
+        class="primary-button"
+        [disabled]="!logInForm.valid"
+      >
+        Login
+      </button>
+      <hr />
+      <p>Don't have an account?</p>
+      <button
+        mat-raised-button
+        type="button"
+        class="signup-button"
+        (click)="openDialog()"
+      >
+        Sign Up
+      </button>
+    </div>
+
+    <div *ngIf="authService.isLogged">
+      <app-logged-in></app-logged-in>
+    </div>
+  </mat-card>
+  <mat-card>
+    <div class="start-card">
+      <p>
+        Start shopping right now at the comfort of your home. We offer secure
+        transactions and top-quality items - fresh and delicious. Our deliveries
+        are super fast and all at low cost.
+      </p>
+      <img src="../../../../assets/middle-panel-image.jpg" alt="shop" />
+    </div>
+  </mat-card>
+  <mat-card>
+    <img
+      src="../../../../assets/right-panel-image.jpg"
+      alt="groceries"
+      class="mt-4"
+    />
+    <div class="about-card">
+      <p>
+        <strong>{{ totalProducts }}</strong> Products are available in our store
+      </p>
+      <p>
+        <strong>{{ totalOrders }}</strong> Orders were submitted in our store
+      </p>
+    </div>
+  </mat-card>
+</div>

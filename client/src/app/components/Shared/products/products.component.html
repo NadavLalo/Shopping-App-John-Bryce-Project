@@ -1,0 +1,51 @@
+<div class="container">
+  <mat-toolbar class="navbar">
+    <a
+      *ngFor="let category of productService.categories"
+      [ngClass]="
+        productService.activeCategory === category._id ? 'active' : null
+      "
+      (click)="onGetProducts(category._id)"
+      ><strong>{{ category.name }}</strong>
+    </a>
+  </mat-toolbar>
+
+  <div class="container">
+    <h4
+      *ngIf="productService.products.length === 0 && !productService.getActive"
+    >
+      Select a category to view products
+    </h4>
+    <h4
+      *ngIf="
+        productService.products.length === 0 &&
+        productService.getActive &&
+        productService.activeCategory
+      "
+    >
+      No products were added to that category
+    </h4>
+    <h4
+      *ngIf="
+        productService.products.length === 0 &&
+        productService.activeCategory === '' &&
+        productService.getActive
+      "
+    >
+      No products were found. Please try again
+    </h4>
+    <div class="products">
+      <div class="product" *ngFor="let product of productService.products">
+        <mat-card (click)="openDialog(product)">
+          <img
+            class="productimg"
+            src="{{ product.imagePath }}"
+            alt="product.name"
+          />
+          <h4>{{ product.name }}</h4>
+          <p>Price: ${{ product.price }}</p>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

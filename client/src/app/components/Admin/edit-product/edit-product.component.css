@@ -1,0 +1,14 @@
+.container {
+  text-align: center;
+  margin: auto;
+}
+
+form {
+  width: 75%;
+  margin: auto;
+}
+
+.delete {
+  position: relative;
+  left: 15px;
+}

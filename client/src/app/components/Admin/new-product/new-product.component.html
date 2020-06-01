@@ -1,0 +1,110 @@
+<div class="container">
+  <form #newProductForm="ngForm" *ngIf="!isAdded">
+    <h3>New Product</h3>
+    <hr />
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Name:"
+        (ngModelChange)="validationErrors.name ? onInputChange(name) : null"
+        name="name"
+        ngModel
+        #name="ngModel"
+        required
+      />
+    </mat-form-field>
+    <p
+      *ngIf="(!name.valid && name.touched) || validationErrors.name"
+      class="error"
+    >
+      This field is required
+    </p>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="Price:"
+        (ngModelChange)="validationErrors.price ? onInputChange(price) : null"
+        name="price"
+        min="0"
+        ngModel
+        #price="ngModel"
+        required
+      />
+    </mat-form-field>
+    <p
+      *ngIf="(!price.valid && price.touched) || validationErrors.price"
+      class="error"
+    >
+      This field is required
+    </p>
+
+    <mat-form-field style="width: 180px">
+      <ngx-mat-file-input
+        (change)="onFileChange($event)"
+        name="image"
+        placeholder="Image:"
+        ngModel
+        #image="ngModel"
+        required
+      ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+    <p
+      *ngIf="(!image.valid && image.touched) || validationErrors.image"
+      class="error"
+    >
+      This field is required
+    </p>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select
+        name="category"
+        (ngModelChange)="
+          validationErrors.category ? onInputChange(category) : null
+        "
+        ngModel
+        #category="ngModel"
+        required
+      >
+        <mat-option
+          *ngFor="let category of productService.categories"
+          value="{{ category._id }}"
+        >
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <p
+      *ngIf="(!category.valid && category.touched) || validationErrors.category"
+      class="error"
+    >
+      This field is required
+    </p>
+    <div>
+      <button
+        mat-raised-button
+        type="button"
+        class="primary-button"
+        [disabled]="!newProductForm.valid"
+        (click)="onSubmit(newProductForm)"
+      >
+        Add
+      </button>
+      <button
+        mat-raised-button
+        type="button"
+        class="cancel-button"
+        (click)="closeDialog()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="isAdded">
+    <h3>Product was added successfully</h3>
+  </div>
+</div>

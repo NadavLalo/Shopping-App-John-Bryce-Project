@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5e1b40d4bbacb23e685ab646"},"user":"12345678","cart":"5e1b40bebbacb23e685ab63f","totalPrice":{"$numberInt":"92"},"city":"Kfar Saba","street":"Herzel 6","dateToShip":"31/01/2020","dateOrdered":"12/01/2020","creditcard":"1234","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5e1e411a84645b138862fbd4"},"user":"123456789","cart":"5e1e410984645b138862fbd1","totalPrice":{"$numberInt":"49"},"city":"Tel Aviv","street":"aaa","dateToShip":"28/01/2020","dateOrdered":"14/01/2020","creditcard":"5443","__v":{"$numberInt":"0"}}

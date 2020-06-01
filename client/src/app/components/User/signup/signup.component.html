@@ -1,0 +1,249 @@
+<div class="container">
+  <h2>Sign Up</h2>
+  <div *ngIf="!stepOneComplete">
+    <form [formGroup]="stepOneForm">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="ID:"
+          type="text"
+          name="_id"
+          formControlName="_id"
+          (ngModelChange)="errors._id ? inputChangeAfterError('_id') : null"
+        />
+      </mat-form-field>
+      <p
+        *ngIf="
+          (stepOneForm.get('_id').touched &&
+            stepOneForm.get('_id').hasError('required')) ||
+          errors._id === 'required'
+        "
+        class="error"
+      >
+        This field is required
+      </p>
+      <p
+        *ngIf="
+          stepOneForm.get('_id').dirty &&
+          stepOneForm.get('_id').hasError('minlength')
+        "
+        class="error"
+      >
+        ID must be at least 6 characters
+      </p>
+      <p *ngIf="errors._id === 'unavailable'" class="error">
+        ID already registered
+      </p>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Email:"
+          type="email"
+          name="email"
+          (ngModelChange)="errors.email ? inputChangeAfterError('email') : null"
+          formControlName="email"
+        />
+      </mat-form-field>
+
+      <p
+        *ngIf="
+          (stepOneForm.get('email').touched &&
+            stepOneForm.get('email').hasError('required')) ||
+          errors.email === 'required'
+        "
+        class="error"
+      >
+        This field is required
+      </p>
+      <p
+        *ngIf="
+          stepOneForm.get('email').dirty &&
+          stepOneForm.get('email').hasError('email')
+        "
+        class="error"
+      >
+        Input must be a valid Email address
+      </p>
+      <p *ngIf="errors.email === 'unavailable'" class="error">
+        Email already registered
+      </p>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password:"
+          type="password"
+          name="password"
+          formControlName="password"
+          (ngModelChange)="
+            errors.password ? inputChangeAfterError('password') : null
+          "
+        />
+      </mat-form-field>
+      <p
+        *ngIf="
+          (stepOneForm.get('password').touched &&
+            stepOneForm.get('password').hasError('required')) ||
+          errors.password === 'required'
+        "
+        class="error"
+      >
+        This field is required
+      </p>
+      <p
+        *ngIf="
+          stepOneForm.get('password').dirty &&
+          stepOneForm.get('password').hasError('minlength')
+        "
+        class="error"
+      >
+        Password must be at least 4 characters
+      </p>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Confirm Password:"
+          type="password"
+          name="confirmPassword"
+          formControlName="confirmPassword"
+          (ngModelChange)="
+            errors.confirmPassword
+              ? inputChangeAfterError('confirmPassword')
+              : null
+          "
+        />
+      </mat-form-field>
+      <p
+        *ngIf="
+          (stepOneForm.get('confirmPassword').touched &&
+            stepOneForm.get('confirmPassword').hasError('required')) ||
+          errors.confirmPassword === 'required'
+        "
+        class="error"
+      >
+        This field is required
+      </p>
+      <p
+        class="error"
+        *ngIf="stepOneForm.get('confirmPassword').hasError('mustMatch')"
+      >
+        Passwords must match
+      </p>
+      <div>
+        <button
+          mat-raised-button
+          class="primary-button"
+          [disabled]="!stepOneForm.valid"
+          (click)="stepOneSubmit()"
+        >
+          Continue
+        </button>
+        <button mat-raised-button class="cancel-button" (click)="dialogClose()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="stepOneComplete">
+    <form #stepTwoForm="ngForm">
+      <mat-form-field>
+        <mat-label>City:</mat-label>
+        <mat-select
+          ngModel
+          name="city"
+          #city="ngModel"
+          (ngModelChange)="errors.city ? inputChangeAfterError('city') : null"
+          required
+        >
+          <mat-option *ngFor="let city of cities" [value]="city">
+            {{ city }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <p *ngIf="(!city.valid && city.touched) || errors.city" class="error">
+        This field is required
+      </p>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Street:"
+          type="text"
+          id="street"
+          name="street"
+          ngModel
+          #street="ngModel"
+          (ngModelChange)="
+            errors.street ? inputChangeAfterError('street') : null
+          "
+          required
+        />
+      </mat-form-field>
+      <p
+        *ngIf="(!street.valid && street.touched) || errors.street"
+        class="error"
+      >
+        This field is required
+      </p>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="First Name:"
+          type="text"
+          name="firstname"
+          ngModel
+          #firstname="ngModel"
+          (ngModelChange)="
+            errors.firstname ? inputChangeAfterError('firstname') : null
+          "
+          required
+        />
+      </mat-form-field>
+      <p
+        *ngIf="(!firstname.valid && firstname.touched) || errors.firstname"
+        class="error"
+      >
+        This field is required
+      </p>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Last Name:"
+          type="text"
+          name="lastname"
+          ngModel
+          #lastname="ngModel"
+          (ngModelChange)="
+            errors.lastname ? inputChangeAfterError('lastname') : null
+          "
+          required
+        />
+      </mat-form-field>
+      <p
+        *ngIf="(!lastname.valid && lastname.touched) || errors.lastname"
+        class="error"
+      >
+        This field is required
+      </p>
+      <div>
+        <button
+          mat-raised-button
+          class="primary-button"
+          [disabled]="!stepTwoForm.valid"
+          (click)="onSignUp(stepOneForm, stepTwoForm)"
+        >
+          Sign Up
+        </button>
+        <button mat-raised-button class="cancel-button" (click)="dialogClose()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container">
+  <h4>Order</h4>
+  <hr />
+  <h5>Shipping Details:</h5>
+
+  <form #orderForm="ngForm">
+    <mat-form-field>
+      <mat-label>City</mat-label>
+      <mat-select name="city" [(ngModel)]="city" required #cityRef="ngModel">
+        <mat-option *ngFor="let city of cities" [value]="city">
+          {{ city }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p *ngIf="!cityRef.valid && cityRef.touched" class="er">
+      This field is required
+    </p>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Street:"
+        type="text"
+        id="street"
+        name="street"
+        ngModel
+        [(ngModel)]="street"
+        required
+        #streetRef="ngModel"
+      />
+    </mat-form-field>
+    <p *ngIf="!streetRef.valid && streetRef.touched" class="error">
+      This field is required
+    </p>
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="myDatepicker"
+        placeholder="Order Date:"
+        name="date"
+        (dateChange)="dateError = false"
+        ngModel
+        required
+        #date="ngModel"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="myDatepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+    <p *ngIf="!date.valid && date.touched && date.length === 0" class="error">
+      This field is required
+    </p>
+    <p *ngIf="!date.valid && date.touched" class="error">
+      Not a valid date
+    </p>
+    <p *ngIf="dateError" class="error">
+      Order Date is full. Please select another date
+    </p>
+    <hr />
+    <h5>Payments:</h5>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Credit Card:"
+        type="text"
+        name="creditcard"
+        ngModel
+        pattern="^(\d{16})$"
+        required
+        #creditcard="ngModel"
+      />
+    </mat-form-field>
+    <p *ngIf="!creditcard.dirty && creditcard.touched" class="error">
+      This field is required
+    </p>
+    <p class="error" *ngIf="creditcard.errors?.pattern">
+      Not a valid credit card number
+    </p>
+    <hr />
+    <div>
+      <button
+        mat-raised-button
+        type="button"
+        class="primary-button"
+        [disabled]="!orderForm.valid"
+        (click)="onOrderSubmit(orderForm)"
+      >
+        Order
+      </button>
+      <button
+        mat-raised-button
+        type="button"
+        class="cancel-button"
+        (click)="cancelOrder()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

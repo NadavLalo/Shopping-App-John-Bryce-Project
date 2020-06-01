@@ -1,0 +1,34 @@
+<div>
+  <h4>Hello, {{ authService.user.firstname }}</h4>
+
+  <mat-spinner class="loading" *ngIf="cartService.isLoading"></mat-spinner>
+
+  <div *ngIf="!cartService.isLoading && cartService.cartItems.length > 0">
+    <p>You have an open cart from {{ cartService.cart.date }}</p>
+    <button
+      mat-raised-button
+      class="primary-button"
+      (click)="onShoppingClick()"
+    >
+      Continue Shopping
+    </button>
+  </div>
+
+  <div *ngIf="!cartService.isLoading && !cartService.cartItems.length > 0">
+    <button
+      mat-raised-button
+      class="primary-button"
+      (click)="onShoppingClick()"
+    >
+      Start Shopping
+    </button>
+    <p *ngIf="cartService.lastOrder; else elseBlock">
+      Your last order was on {{ cartService.lastOrder }}
+    </p>
+    <ng-template #elseBlock>
+      <p>
+        Welcome to your first buy!
+      </p>
+    </ng-template>
+  </div>
+</div>

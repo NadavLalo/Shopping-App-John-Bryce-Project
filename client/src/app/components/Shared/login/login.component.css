@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+mat-card {
+  width: 33%;
+  height: 500px;
+  margin: 0 15px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .mat-card {
+    width: 75%;
+    margin: auto;
+    margin-bottom: 15px;
+  }
+}
+
+img {
+  width: 98%;
+}
+
+.login-card {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin: auto;
+}
+
+.start-card p {
+  text-align: center;
+  width: 80%;
+  margin: 15px auto 50px auto;
+}
+
+.about-card {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.signup-button {
+  background-color: green;
+  color: white;
+}
+

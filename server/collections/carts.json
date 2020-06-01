@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5e1b40bebbacb23e685ab63f"},"date":"12/01/2020","user":"12345678","active":false,"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5e1b40e8bbacb23e685ab647"},"date":"12/01/2020","user":"12345678","active":true,"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5e1e410984645b138862fbd1"},"date":"14/01/2020","user":"123456789","active":false,"__v":{"$numberInt":"0"}}

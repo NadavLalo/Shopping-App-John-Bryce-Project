@@ -1,0 +1,17 @@
+<div class="container">
+  <h3>Your order has been submitted!</h3>
+  <p>
+    Click
+    <a [href]="fileUrl" download="receipt.txt">here</a>
+    to download your receipt
+  </p>
+
+  <button
+    mat-raised-button
+    type="button"
+    class="cancel-button"
+    (click)="backToShop()"
+  >
+    Back to shop
+  </button>
+</div>

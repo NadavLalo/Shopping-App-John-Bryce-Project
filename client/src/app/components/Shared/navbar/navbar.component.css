@@ -1,0 +1,79 @@
+.fill-space {
+  /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.welcome {
+  margin-right: 10px;
+}
+
+.desktop-navbar {
+  background-color: darkblue;
+  color: white;
+}
+
+mat-toolbar-row {
+  margin: -5px;
+}
+
+.log {
+  margin-right: 10px;
+  background-color: black;
+  color: white;
+  border: white solid 1px;
+}
+
+.search:disabled {
+  background-color: rgb(85, 182, 85);
+  opacity: 0.6;
+}
+.search {
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: rgb(85, 182, 85);
+  color: white;
+  border: 1px solid white;
+}
+
+.add {
+  background-color: rgb(52, 149, 179);
+  color: white;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 550px) {
+  .desktop-navbar {
+    display: none;
+  }
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    background-color: darkblue;
+    height: auto;
+    color: white;
+    margin-bottom: 15px;
+  }
+
+  .mobile-nav h3 {
+    margin-top: 15px;
+  }
+
+  .log {
+    margin: 15px 0;
+  }
+}
+
+.togglebar {
+  animation-name: slidein;
+  animation-duration: 0.3s;
+}
+
+mat-sidenav-container {
+  background: transparent;
+  color: white;
+  text-align: center;
+}

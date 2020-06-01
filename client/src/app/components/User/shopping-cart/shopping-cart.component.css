@@ -1,0 +1,45 @@
+img {
+  width: 30px;
+}
+
+.cart {
+  height: auto;
+  max-height: 450px;
+  overflow: auto;
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .cart {
+    max-height: 350px;
+  }
+}
+
+tr {
+  text-align: left;
+}
+
+.bill {
+  height: 100px;
+  text-align: center;
+}
+
+.searched {
+  background-color: green;
+}
+
+mat-card {
+  margin: 0 15px 0 15px;
+  border: #ccc 1px solid;
+}
+
+table {
+  width: 100%;
+}
+
+@media (max-width: 450px) {
+  td,
+  th {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,121 @@
+<mat-toolbar class="desktop-navbar">
+  <mat-toolbar-row>
+    <span><strong>Lalo's Shop</strong></span>
+
+    <span class="fill-space"></span>
+
+    <span *ngIf="!authService.isLogged && !authService.isAdmin"
+      >Hello, Guest</span
+    >
+    <span class="welcome" *ngIf="authService.isLogged || authService.isAdmin">
+      Hello, {{ authService.user.firstname }}
+    </span>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="authService.isLogged || authService.isAdmin">
+    <form #searchForm="ngForm" *ngIf="this.productService.searchable">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Search Product"
+          type="text"
+          name="searchInput"
+          (ngModelChange)="
+            cartService.isOrdered ? userCartSearch($event) : null
+          "
+          (focusout)="cartService.isOrdered ? resetInput(searchForm) : null"
+          [ngModel]
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="search"
+        *ngIf="!cartService.isOrdered && !orderService.orderSubmitted"
+        type="button"
+        (click)="onSearch(searchForm)"
+        [disabled]="!searchForm.value.searchInput"
+      >
+        Search
+      </button>
+      <button
+        mat-raised-button
+        *ngIf="authService.isAdmin"
+        class="add"
+        (click)="openDialog()"
+      >
+        Add Product
+      </button>
+    </form>
+    <span class="fill-space"></span>
+    <button
+      class="log"
+      mat-raised-button
+      *ngIf="authService.isLogged || authService.isAdmin"
+      (click)="onLogOut()"
+    >
+      Log Out
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-toolbar class="mobile-nav">
+  <h3><strong>Lalo's Shop</strong></h3>
+
+  <p *ngIf="!authService.isLogged && !authService.isAdmin">
+    Hello, Guest
+  </p>
+  <p class="welcome" *ngIf="authService.isLogged || authService.isAdmin">
+    Hello, {{ authService.user.firstname }}
+  </p>
+
+  <button mat-icon-button *ngIf="this.productService.searchable">
+    <mat-icon (click)="toggleSideBar()">menu</mat-icon>
+  </button>
+
+  <mat-sidenav-container class="togglebar" *ngIf="panelOpenState">
+    <mat-sidenav-content>
+      <form #searchForm="ngForm">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Search Product"
+            type="text"
+            name="searchInput"
+            (ngModelChange)="
+              cartService.isOrdered ? userCartSearch($event) : null
+            "
+            [ngModel]
+          />
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          class="search"
+          *ngIf="!cartService.isOrdered"
+          type="button"
+          (click)="onSearch(searchForm)"
+          [disabled]="!searchForm.value.searchInput"
+        >
+          Search
+        </button>
+      </form>
+      <div>
+        <button
+          mat-raised-button
+          *ngIf="authService.isAdmin"
+          class="add"
+          (click)="openDialog()"
+        >
+          Add Product
+        </button>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <button
+    class="log"
+    mat-raised-button
+    *ngIf="authService.isLogged || authService.isAdmin"
+    (click)="onLogOut()"
+  >
+    Log Out
+  </button>
+</mat-toolbar>

@@ -1,0 +1,3 @@
+{"_id":"11111111","email":"Admin","password":"1234","city":"1","street":"1","firstname":"Admin","lastname":"Admin","role":"Admin","__v":{"$numberInt":"0"}}
+{"_id":"12345678","email":"user@user.com","password":"1234","city":"Kfar Saba","street":"Herzel 6","firstname":"Nadav","lastname":"Lalo","role":"User","__v":{"$numberInt":"0"}}
+{"_id":"123456789","email":"d@d.com","password":"1234","city":"Tel Aviv","street":"aaa","firstname":"aaa","lastname":"aaa","role":"User","__v":{"$numberInt":"0"}}
