@@ -3,6 +3,8 @@
 <br>
 MVC Architecture
 <br>
+User/Admin Interfaces
+<br>
 <br>
 Backend:
 <br>
